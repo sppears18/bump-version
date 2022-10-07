@@ -23,6 +23,7 @@ on:
     paths:
       - .github/workflows/ecr_push.yml
       - pyproject.toml
+      - main.py
 
 jobs:
   build_push:

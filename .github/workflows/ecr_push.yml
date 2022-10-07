@@ -58,10 +58,11 @@ jobs:
           git tag ${{ env.DATA_PROVIDER_VERSION }}
           git push origin ${{ env.DATA_PROVIDER_VERSION }}
 
-      - name: Checkout master branch
+      # this will need to be updated to master
+      - name: Checkout main branch
         uses: actions/checkout@v3
         with:
-          ref: master
+          ref: main
 
       - name: Bump version with patch ready for next run
         run: |

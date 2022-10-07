@@ -13,7 +13,7 @@ name: Deploy to AWS ECR
 on:
   pull_request:
     types: [closed]
-    branches: [master]
+    branches: [main]
     paths:
       - .github/workflows/ecr_push.yml
       - "main.py"

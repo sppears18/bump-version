@@ -8,6 +8,7 @@
 # will save developers time and will also avoid failing merges because of duplicate git tags
 #
 #
+# test
 name: Deploy to AWS ECR
 on:
   pull_request:

@@ -18,12 +18,12 @@ on:
       - .github/workflows/ecr_push.yml
       - "main.py"
       - pyproject.toml
-  push:
-    branches: [feat/**]
-    paths:
-      - .github/workflows/ecr_push.yml
-      - pyproject.toml
-      - main.py
+#  push:
+#    branches: [feat/**]
+#    paths:
+#      - .github/workflows/ecr_push.yml
+#      - pyproject.toml
+#      - main.py
 
 jobs:
   build_push:
@@ -37,8 +37,6 @@ jobs:
 
       - name: Checkout
         uses: actions/checkout@v3
-#        with:
-#          ref: ${{ github.event.pull_request.head.ref }}
 
       - name: Set up python
         uses: actions/setup-python@v4
@@ -64,10 +62,10 @@ jobs:
           git push origin ${{ env.DATA_PROVIDER_VERSION }}
 
       # this will need to be updated to master
-      - name: Checkout main branch
-        uses: actions/checkout@v3
-        with:
-          ref: main
+#      - name: Checkout main branch
+#        uses: actions/checkout@v3
+#        with:
+#          ref: main
 
       - name: Bump version with patch ready for next run
         run: |

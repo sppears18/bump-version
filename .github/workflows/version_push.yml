@@ -8,14 +8,14 @@
 # will save developers time and will also avoid failing merges because of duplicate git tags
 #
 #
-name: Deploy to AWS ECR
+name: Release
 
 on:
   pull_request:
     types: [closed]
     branches: [main]
     paths:
-      - .github/workflows/ecr_push.yml
+      - .github/workflows/version_push.yml
       - "main.py"
       - pyproject.toml
 
@@ -42,20 +42,20 @@ jobs:
 
       - name: Extract service version
         run: |
-          echo "DATA_PROVIDER_VERSION=$(poetry version --short)" >> $GITHUB_ENV
+          echo "VERSION=$(poetry version --short)" >> $GITHUB_ENV
           echo "$(poetry version --short)"
 
       - name: Push git tag version
         run: |
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config user.name "github-actions[bot]"
-          git tag -a ${{ env.DATA_PROVIDER_VERSION }} -m "${{ env.DATA_PROVIDER_VERSION }}"
-          git push origin ${{ env.DATA_PROVIDER_VERSION }}
+          git tag -a ${{ env.VERSION }} -m "${{ env.VERSION }}"
+          git push origin ${{ env.VERSION }}
 
       - name: Bump version with patch ready for next run
         run: |
           poetry version --short patch
-          echo "DATA_PROVIDER_VERSION_PATCHED=$(poetry version --short)" >> $GITHUB_ENV
+          echo "VERSION_PATCHED=$(poetry version --short)" >> $GITHUB_ENV
           echo "$(poetry version --short)"
 
       - name: Commit patched semantic version ready for next run
@@ -66,5 +66,4 @@ jobs:
           default_author: github_actor
           committer_name: GitHub Actions
           committer_email: 41898282+github-actions[bot]@users.noreply.github.com
-          message: "github action has patched version to ${{ env.DATA_PROVIDER_VERSION_PATCHED }}"
-
+          message: "github action has patched version to ${{ env.VERSION_PATCHED }}"

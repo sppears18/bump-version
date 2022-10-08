@@ -18,23 +18,12 @@ on:
       - .github/workflows/ecr_push.yml
       - "main.py"
       - pyproject.toml
-#  push:
-#    branches: [feat/**]
-#    paths:
-#      - .github/workflows/ecr_push.yml
-#      - pyproject.toml
-#      - main.py
 
 jobs:
   build_push:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
-      - name: Debug context
-        env:
-          GITHUB_CONTEXT: ${{ toJSON(github) }}
-        run: echo "$GITHUB_CONTEXT"
-
       - name: Checkout
         uses: actions/checkout@v3
 
@@ -62,12 +51,6 @@ jobs:
           git config user.name "github-actions[bot]"
           git tag -a ${{ env.DATA_PROVIDER_VERSION }} -m "${{ env.DATA_PROVIDER_VERSION }}"
           git push origin ${{ env.DATA_PROVIDER_VERSION }}
-
-      # this will need to be updated to master
-#      - name: Checkout main branch
-#        uses: actions/checkout@v3
-#        with:
-#          ref: main
 
       - name: Bump version with patch ready for next run
         run: |

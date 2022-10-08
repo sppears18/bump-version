@@ -58,7 +58,7 @@ jobs:
 
       - name: Push git tag version
         run: |
-          git tag ${{ env.DATA_PROVIDER_VERSION }}
+          git tag -a ${{ env.DATA_PROVIDER_VERSION }} -m "${{ env.DATA_PROVIDER_VERSION }}"
           git push origin ${{ env.DATA_PROVIDER_VERSION }}
 
       # this will need to be updated to master

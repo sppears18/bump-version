@@ -57,7 +57,6 @@ jobs:
           poetry version --short patch
           echo "DATA_PROVIDER_VERSION_PATCHED=$(poetry version --short)" >> $GITHUB_ENV
           echo "$(poetry version --short)"
-          git status
 
       - name: Commit patched semantic version ready for next run
         uses: EndBug/add-and-commit@v9.1.0
